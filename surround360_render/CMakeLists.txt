@@ -14,6 +14,8 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/source/calibration)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/source/render)
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR})
 INCLUDE_DIRECTORIES(/usr/local/include/eigen3)
+INCLUDE_DIRECTORIES(/home/reality7/ffmpeg_build/include)
+LINK_DIRECTORIES(/home/reality7/ffmpeg_build/lib)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # required for clang, including AppleClang
