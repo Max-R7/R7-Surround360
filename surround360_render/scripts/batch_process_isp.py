@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Copyright (c) 2016-present, Facebook, Inc.
 # All rights reserved.
 #
@@ -124,7 +125,7 @@ if __name__ == "__main__":
 
   if verbose:
     total_runtime = end_time - start_time
-    avg_runtime = total_runtime / float(max_frame - min_frame + 1)
+    avg_runtime = total_runtime / float(max(max_frame - min_frame + 1, 1))
     print "ISP total runtime:", total_runtime, "sec"
     print "Average runtime:", avg_runtime, "sec/frame"
     sys.stdout.flush()
