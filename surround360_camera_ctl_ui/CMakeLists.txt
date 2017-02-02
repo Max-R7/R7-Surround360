@@ -14,6 +14,8 @@ pkg_check_modules(GL gl)
 pkg_check_modules(GLEW glew)
 pkg_check_modules(GLU glu)
 
+INCLUDE_DIRECTORIES(/home/reality7/ffmpeg_build/include)
+
 INCLUDE_DIRECTORIES(/usr/include/flycapture)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/source)
 INCLUDE_DIRECTORIES(${GTKMM_INCLUDE_DIRS})
@@ -29,6 +31,8 @@ INCLUDE_DIRECTORIES(../surround360_render/source)
 INCLUDE_DIRECTORIES(../surround360_render)
 INCLUDE_DIRECTORIES(${HALIDE_DIR}/include)
 INCLUDE_DIRECTORIES(${HALIDE_DIR}/src)
+
+LINK_DIRECTORIES(/home/reality7/ffmpeg_build/lib)
 
 LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
 LINK_DIRECTORIES(${GLIBMM_LIBRARY_DIRS})
