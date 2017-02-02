@@ -25,23 +25,12 @@ Surround 360 is a hardware and software system for capturing and rendering 3d (s
 
 * This software has been tested on Ubuntu 14.04/16.04 LTS (CMake 3.2.2) and OS X 10.11.5 (using CMake 3.5.1).
 
-* If you are building on OS X, it may be more convenient to use brew to install some dependencies.
-
-* Install CMake (method 1):
-  see https://cmake.org
-
 * Install CMake (method 2 - Linux only)
 ```
   sudo apt-get install software-properties-common
   sudo add-apt-repository ppa:george-edison55/cmake-3.x
   sudo apt-get update
   sudo apt-get install cmake && sudo apt-get upgrade cmake
-```
-
-* Install homebrew (on OS X):
-  http://brew.sh/, or just run this directly:
-```
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 * Git is used to download and install packages from source (e.g. OpenCV below). Git may come preinstalled (check using git --version). It is not required if using brew in OS X.
@@ -56,24 +45,9 @@ Surround 360 is a hardware and software system for capturing and rendering 3d (s
   sudo apt install subversion
 ```
 
-* Install Subversion (method 1 - OS X only):
-```
-  brew install subversion
-```
-
-* Install Git (method 2 - OS X only):
-```
-  brew install git
-```
-
 * Install Python (method 1 - Linux only):
 ```
   sudo apt-get install python
-```
-
-* Install Python (method 2 - OS X only):
-```
-  brew install python
 ```
 
 * Install gflags (method 1 - Linux only):
@@ -81,28 +55,13 @@ Surround 360 is a hardware and software system for capturing and rendering 3d (s
   sudo apt-get install libgflags2v5 libgflags-dev
 ```
 
-* Install gflags (method 2 - OS X only):
-```
-  brew install gflags
-```
-
 * Install glog (method 1 - Linux only):
 ```
   sudo apt-get install libgoogle-glog-dev
-```
-
-* Install glog (method 2 - OS X only):
-```
-  brew install glog
-```
+`````
 
 * Install folly (method 1):
   see https://github.com/facebook/folly
-
-* Install folly (method 2 - OS X only):
-<pre>
-  brew install folly
-</pre>
 
 * Install Ceres (method 1 - Linux only)
   see http://ceres-solver.org/installation.html
@@ -120,11 +79,6 @@ Surround 360 is a hardware and software system for capturing and rendering 3d (s
   sudo ln -s /usr/include/eigen3/Eigen /usr/local/include/Eigen
 ```
 
-* Install Ceres (method 2 - OSX only)
-<pre>
-  brew install ceres-solver
-</pre>
-
 * Install OpenCV:
 ```
   cd ~
@@ -138,41 +92,92 @@ Surround 360 is a hardware and software system for capturing and rendering 3d (s
 
 * Install ffmpeg (method 1):
   see https://trac.ffmpeg.org/wiki/CompilationGuide
+* Install dependencies
+  sudo apt-get update
+  sudo apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev
 
-* Install ffmpeg (method 2 - OS X only):
-```
-  brew install ffmpeg
-```
+* Install Yasm
+  cd ~/ffmpeg_sources
+  wget http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz
+  tar xzvf yasm-1.3.0.tar.gz
+  cd yasm-1.3.0
+  ./configure 
+  --prefix="$HOME/ffmpeg_build" \
+  --bindir="$HOME/bin"
+  make
+  make install
+  make distclean
 
-* Install Gooey (method 1):
-  see https://github.com/chriskiehl/Gooey
+* Install libx264
+  cd ~/ffmpeg_sources
+  wget http://download.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
+  tar xjvf last_x264.tar.bz2
+  cd x264-snapshot*
+  PATH="$HOME/bin:$PATH" ./configure 
+  --prefix="$HOME/ffmpeg_build" \
+  --bindir="$HOME/bin" \
+  --enable-static \
+  --disable-opencl \
+  --enable-shared
+  PATH="$HOME/bin:$PATH" make
+  make install
+  make distclean
+
+* Install livbpx
+  cd ~/ffmpeg_sources
+  wget http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.5.0.tar.bz2
+  tar xjvf libvpx-1.5.0.tar.bz2
+  cd libvpx-1.5.0
+  PATH="$HOME/bin:$PATH" ./configure 
+  --prefix="$HOME/ffmpeg_build" \
+  --disable-examples \
+  --disable-unit-tests \
+  --enable-shared \
+  PATH="$HOME/bin:$PATH" make
+  make install
+  make clean
+
+
+* Install Ffmpeg
+  cd ~/ffmpeg_sources
+  wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
+  tar xjvf ffmpeg-snapshot.tar.bz2
+  cd ffmpeg
+  PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+  --prefix="$HOME/ffmpeg_build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include" \
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+  --bindir="$HOME/bin" \
+  --enable-nonfree \  
+  --enable-gpl \
+  --enable-libx264 \
+  --enable-shared \
+  --enable-libvpx 
+  PATH="$HOME/bin:$PATH" make
+  make install
+  make distclean
+  hash -r
+
+  cd /etc/ld.so.conf.d/
+  sudo vim ffmpeg.conf
+
+#Add one line:
+  /home/reality7/ffmpeg_build/lib
+
+  sudo ldconfig
 
 * Install Gooey (method 2 - Linux only):
 ```
   sudo apt-get install python-pip
   sudo pip install --upgrade pip
   sudo pip install Gooey
-  sudo apt-get install python-wxgtk2.8
-```
-
-If python-wxgtk2.8 not available (e.g. Ubuntu 16.04):
-```
   echo "deb http://archive.ubuntu.com/ubuntu wily main universe" | sudo tee /etc/apt/sources.list.d/wily-copies.list
   sudo apt update
   sudo apt install python-wxgtk2.8
   sudo rm /etc/apt/sources.list.d/wily-copies.list
   sudo apt update
-```
-
-
-* Install Gooey (method 3 - OS X only):
-```
-  pip install --upgrade pip
-  sudo pip install Gooey
-  brew install wxpython
-  brew install wxmac
-  brew link wxmac
-```
+``
 
 * (if using accelerated ISP) Install LLVM
 ```
