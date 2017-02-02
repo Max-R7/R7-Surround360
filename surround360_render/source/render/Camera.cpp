@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+using namespace std;
+
 namespace surround360 {
 
 void Camera::setRotation(
