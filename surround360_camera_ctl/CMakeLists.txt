@@ -2,6 +2,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
 
 PROJECT(Surround360CameraCtl CXX)
 
+INCLUDE_DIRECTORIES(/home/reality7/ffmpeg_build/include)
+
 INCLUDE_DIRECTORIES(/usr/include/flycapture)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/source)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/source/camera_control)
@@ -45,6 +47,7 @@ TARGET_LINK_LIBRARIES(
   "-lavcodec"
   "-lavformat"
   "-lavfilter"
+  "-L/home/reality7/ffmpeg_build/lib"
 )
 
 ### Producer consumer test ###
