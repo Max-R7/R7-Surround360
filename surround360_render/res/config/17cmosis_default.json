@@ -8,7 +8,7 @@
       "is_fisheye": true,
       "image_center_x": 1024,
       "image_center_y": 1024,
-      "fisheye_rotation_deg": 0.0,
+      "fisheye_rotation_deg": 180.0,
       "usable_pixels_radius": 781,
       "fisheye_fov_deg": 185.0,
       "fisheye_fov_deg_crop": 140.0
@@ -33,7 +33,7 @@
       "is_fisheye": true,
       "image_center_x": 1024,
       "image_center_y": 1024,
-      "fisheye_rotation_deg": 180.0,
+      "fisheye_rotation_deg": 0.0,
       "usable_pixels_radius": 781,
       "fisheye_fov_deg": 185.0,
       "fisheye_fov_deg_crop": 140.0
@@ -44,7 +44,7 @@
       "is_fisheye": true,
       "image_center_x": 1024,
       "image_center_y": 1024,
-      "flip180": true,
+      "flip180": false,
       "usable_pixels_radius": 781,
       "fisheye_fov_deg": 185.0,
       "fisheye_fov_deg_crop": 140.0
